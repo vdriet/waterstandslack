@@ -1,3 +1,4 @@
+cd /home/peter/dev/waterstandslack
 . ./setslackenv.sh
 docker stop waterstandslack
 docker rm -f waterstandslack

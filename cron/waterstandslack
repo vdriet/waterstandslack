@@ -1,1 +1,1 @@
-5 * * * * peter [ -x /home/peter/dev/waterstandslack/run.sh ] && /home/peter/dev/waterstandslack/run.sh
+5 * * * * peter [ -x /home/peter/dev/waterstandslack/run.sh ] && /home/peter/dev/waterstandslack/run.sh >> /home/peter/logs/cron_waterstandslack.log 2>&1
