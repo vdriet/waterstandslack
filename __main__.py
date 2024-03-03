@@ -65,7 +65,7 @@ def checkwaterstand_en_post():
     meldingmaken = True
   if hoogtemorgen - hoogtenu > 10 or hoogtenu - hoogtemorgen > 10 :
     meldingmaken = True
-  if ' 10:' in weergave_tijd :
+  if ' 11:' in weergave_tijd :
     meldingmaken = True
 
   if meldingmaken :
