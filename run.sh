@@ -1,4 +1,3 @@
-cd /home/peter/dev/waterstandslack
 docker stop waterstandslack
 docker rm -f waterstandslack
 docker run \
