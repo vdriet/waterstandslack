@@ -61,14 +61,14 @@ def checkwaterstand_en_post():
   """ haal de waterstand en zet die op slack als het aan de voorwaarden voldoet """
   weergave_tijd, hoogtenu, hoogtemorgen = haalwaterstand_default()
   meldingmaken = False
-  if hoogtenu > 100 or hoogtemorgen > 100 :
+  if hoogtenu > 100 or hoogtemorgen > 100:
     meldingmaken = True
-  if hoogtemorgen - hoogtenu > 10 or hoogtenu - hoogtemorgen > 10 :
+  if hoogtemorgen - hoogtenu > 10 or hoogtenu - hoogtemorgen > 10:
     meldingmaken = True
-  if ' 11:' in weergave_tijd :
+  uurnu = datetime.now().hour
+  if uurnu == 12:
     meldingmaken = True
-
-  if meldingmaken :
+  if meldingmaken:
     post_waterstand(weergave_tijd, hoogtenu, hoogtemorgen)
 
 def haalwaterstand_en_post():
