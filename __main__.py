@@ -13,7 +13,18 @@ def postwaterstand(weergavetijd, hoogtenu, hoogtemorgen):
   slack = Slacker(slackid)
 
   slack.chat.post_message('#waterstand', f'Stand {weergavetijd} {hoogtenu}, morgen {hoogtemorgen}')
-  print(f'Bericht op slack gezet: Stand {weergavetijd} {hoogtenu}')
+
+def toonlaatstebericht():
+  """ haal de laatste post van de waterstand op """
+  slackid = os.environ['SLACK_ID_RASPBOT']
+  slack = Slacker(slackid)
+  convlist = slack.conversations.list()
+  for channel in convlist.body['channels']:
+    if channel['name'] == 'waterstand':
+      channelid = channel['id']
+      message = slack.conversations.history(channel = channelid, limit = 1)
+      laatste = message.body['messages'][0]['text']
+      print(f'Laatste bericht op slack: {laatste}')
 
 def checkwaterstandenpost():
   """ haal de waterstand en zet die op slack als het aan de voorwaarden voldoet """
@@ -31,6 +42,7 @@ def checkwaterstandenpost():
     meldingmaken = True
   if meldingmaken:
     postwaterstand(weergavetijd, hoogtenu, hoogtemorgen)
+  toonlaatstebericht()
 
 def haalwaterstandenpost():
   """ haal de waterstand en post het sowieso """
