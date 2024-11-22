@@ -13,6 +13,7 @@ def postwaterstand(weergavetijd, hoogtenu, hoogtemorgen):
   slack = Slacker(slackid)
 
   slack.chat.post_message('#waterstand', f'Stand {weergavetijd} {hoogtenu}, morgen {hoogtemorgen}')
+  print(f'Bericht op slack gezet: Stand {weergavetijd} {hoogtenu}')
 
 def checkwaterstandenpost():
   """ haal de waterstand en zet die op slack als het aan de voorwaarden voldoet """
