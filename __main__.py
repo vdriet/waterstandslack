@@ -54,10 +54,13 @@ def checkwaterstandenpost():
 def haalwaterstandenpost():
   """ haal de waterstand en post het sowieso """
   gegevens = waterstand.haalwaterstand('Katerveer', 'KATV')
-  weergavetijd = gegevens['tijd']
-  hoogtenu = gegevens['nu']
-  hoogtemorgen = gegevens['morgen']
-  postwaterstand(weergavetijd, hoogtenu, hoogtemorgen)
+  if isinstance(gegevens, str):
+    postberichtinwaterstand(gegevens)
+  else:
+    weergavetijd = gegevens['tijd']
+    hoogtenu = gegevens['nu']
+    hoogtemorgen = gegevens['morgen']
+    postwaterstand(weergavetijd, hoogtenu, hoogtemorgen)
 
 def main():
   """ hoofdroutine met standaard verwerking """
