@@ -2,17 +2,21 @@
 import os
 from datetime import datetime
 from slacker import Slacker
-from waterstand import haalwaterstand
+from waterstand import waterstand
 
 BASEURL = 'https://waterinfo.rws.nl/api/chart/get' + \
           '?mapType=waterhoogte&locationCode={}({})&values=-48,48'
 
-def postwaterstand(weergavetijd, hoogtenu, hoogtemorgen):
-  """ post de waterstand op slack """
+def postberichtinwaterstand(bericht):
+  """ zet een bericht in slack kanaal waterstand """
   slackid = os.environ['SLACK_ID_RASPBOT']
   slack = Slacker(slackid)
 
-  slack.chat.post_message('#waterstand', f'Stand {weergavetijd} {hoogtenu}, morgen {hoogtemorgen}')
+  slack.chat.post_message('#waterstand', bericht)
+
+def postwaterstand(weergavetijd, hoogtenu, hoogtemorgen):
+  """ post de waterstand op slack """
+  postberichtinwaterstand(f'Stand {weergavetijd} {hoogtenu}, morgen {hoogtemorgen}')
 
 def toonlaatstebericht():
   """ haal de laatste post van de waterstand op """
@@ -28,25 +32,28 @@ def toonlaatstebericht():
 
 def checkwaterstandenpost():
   """ haal de waterstand en zet die op slack als het aan de voorwaarden voldoet """
-  gegevens = haalwaterstand('Katerveer', 'KATV')
-  weergavetijd = gegevens['tijd']
-  hoogtenu = gegevens['nu']
-  hoogtemorgen = gegevens['morgen']
-  meldingmaken = False
-  if hoogtenu > 100 or hoogtemorgen > 100:
-    meldingmaken = True
-  if hoogtemorgen - hoogtenu > 10 or hoogtenu - hoogtemorgen > 10:
-    meldingmaken = True
-  uurnu = datetime.now().hour
-  if uurnu == 12:
-    meldingmaken = True
-  if meldingmaken:
-    postwaterstand(weergavetijd, hoogtenu, hoogtemorgen)
+  gegevens = waterstand.haalwaterstand('Katerveer', 'KATV')
+  if isinstance(gegevens, str):
+    postberichtinwaterstand(gegevens)
+  else:
+    weergavetijd = gegevens['tijd']
+    hoogtenu = gegevens['nu']
+    hoogtemorgen = gegevens['morgen']
+    meldingmaken = False
+    if hoogtenu > 100 or hoogtemorgen > 100:
+      meldingmaken = True
+    if hoogtemorgen - hoogtenu > 10 or hoogtenu - hoogtemorgen > 10:
+      meldingmaken = True
+    uurnu = datetime.now().hour
+    if uurnu == 12:
+      meldingmaken = True
+    if meldingmaken:
+      postwaterstand(weergavetijd, hoogtenu, hoogtemorgen)
   toonlaatstebericht()
 
 def haalwaterstandenpost():
   """ haal de waterstand en post het sowieso """
-  gegevens = haalwaterstand('Katerveer', 'KATV')
+  gegevens = waterstand.haalwaterstand('Katerveer', 'KATV')
   weergavetijd = gegevens['tijd']
   hoogtenu = gegevens['nu']
   hoogtemorgen = gegevens['morgen']
