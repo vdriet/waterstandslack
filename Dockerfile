@@ -11,4 +11,4 @@ RUN pip install --no-cache-dir --index-url https://test.pypi.org/simple/ --extra
 
 COPY /*.py /usr/src/app/
 
-CMD [ "python", "-u", "." ]
+CMD [ "python", "-u", "waterstandslack.py" ]
