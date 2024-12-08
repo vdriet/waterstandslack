@@ -2,7 +2,7 @@
 import os
 from datetime import datetime
 from slacker import Slacker
-from waterstand import waterstand
+import waterstand
 
 BASEURL = 'https://waterinfo.rws.nl/api/chart/get' + \
           '?mapType=waterhoogte&locationCode={}({})&values=-48,48'

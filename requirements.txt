@@ -10,4 +10,4 @@ requests==2.32.3
 setuptools==75.6.0
 slacker==0.14.0
 urllib3==2.2.3
-waterstand==0.1.2
+waterstand==1.0.0
