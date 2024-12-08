@@ -1,1 +1,1 @@
-. ./bin/activate
+. ./waterstandslack_venv/bin/activate
