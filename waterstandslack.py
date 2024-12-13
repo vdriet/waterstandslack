@@ -33,7 +33,7 @@ def toonlaatstebericht():
 def checkwaterstandenpost():
   """ haal de waterstand en zet die op slack als het aan de voorwaarden voldoet """
   gegevens = waterstand.haalwaterstand('Katerveer', 'KATV')
-  if isinstance(gegevens, str):
+  if gegevens['resultaat'] == 'NOK':
     postberichtinwaterstand(gegevens)
   else:
     weergavetijd = gegevens['tijd']
