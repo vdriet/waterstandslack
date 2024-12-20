@@ -4,8 +4,6 @@ from datetime import datetime
 from slacker import Slacker
 import waterstand
 
-BASEURL = 'https://waterinfo.rws.nl/api/chart/get' + \
-          '?mapType=waterhoogte&locationCode={}({})&values=-48,48'
 
 def postberichtinwaterstand(bericht):
   """ zet een bericht in slack kanaal waterstand """
@@ -14,9 +12,11 @@ def postberichtinwaterstand(bericht):
 
   slack.chat.post_message('#waterstand', bericht)
 
+
 def postwaterstand(weergavetijd, hoogtenu, hoogtemorgen):
   """ post de waterstand op slack """
   postberichtinwaterstand(f'Stand {weergavetijd} {hoogtenu}, morgen {hoogtemorgen}')
+
 
 def toonlaatstebericht():
   """ haal de laatste post van de waterstand op """
@@ -26,9 +26,10 @@ def toonlaatstebericht():
   for channel in convlist.body['channels']:
     if channel['name'] == 'waterstand':
       channelid = channel['id']
-      message = slack.conversations.history(channel = channelid, limit = 1)
+      message = slack.conversations.history(channel=channelid, limit=1)
       laatste = message.body['messages'][0]['text']
       print(f'Laatste bericht op slack: {laatste}')
+
 
 def checkwaterstandenpost():
   """ haal de waterstand en zet die op slack als het aan de voorwaarden voldoet """
@@ -51,20 +52,23 @@ def checkwaterstandenpost():
       postwaterstand(weergavetijd, hoogtenu, hoogtemorgen)
   toonlaatstebericht()
 
+
 def haalwaterstandenpost():
   """ haal de waterstand en post het sowieso """
   gegevens = waterstand.haalwaterstand('Katerveer', 'KATV')
   if gegevens['resultaat'] == 'NOK':
-    postberichtinwaterstand(gegevens)
+    postberichtinwaterstand(gegevens['tekst'])
   else:
     weergavetijd = gegevens['tijd']
     hoogtenu = gegevens['nu']
     hoogtemorgen = gegevens['morgen']
     postwaterstand(weergavetijd, hoogtenu, hoogtemorgen)
 
+
 def main():
   """ hoofdroutine met standaard verwerking """
   checkwaterstandenpost()
 
-if __name__ == "__main__":
+
+if __name__ == "__main__":  # pragma: no cover
   main()

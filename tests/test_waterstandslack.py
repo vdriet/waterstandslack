@@ -149,7 +149,7 @@ def test_main_post_stijging_10_plus(mock_converstations_history, mock_converstat
 @patch('slacker.Conversations.history', return_value=histresponse)
 @freeze_time("2024-12-18 13:05:00")
 def test_main_post_daling_10_plus(mock_converstations_history, mock_converstations_list, mock_post_message,
-                                    mock_haalwaterstand, capsys):
+                                  mock_haalwaterstand, capsys):
   os.environ['SLACK_ID_RASPBOT'] = 'DUMMY'
 
   waterstandslack.main()
@@ -161,3 +161,28 @@ def test_main_post_daling_10_plus(mock_converstations_history, mock_converstatio
   assert mock_post_message.called
   assert mock_converstations_list.called
   assert mock_converstations_history.called
+
+
+@patch('waterstand.haalwaterstand',
+       return_value={'resultaat': 'OK', 'tijd': '11:50', 'datum': '18-12', 'nu': 44.0, 'morgen': 33.0})
+@patch('slacker.Chat.post_message', return_value=None)
+@freeze_time("2024-12-18 13:05:00")
+def test_haalwaterstandenpost(mock_post_message, mock_haalwaterstand):
+  os.environ['SLACK_ID_RASPBOT'] = 'DUMMY'
+
+  waterstandslack.haalwaterstandenpost()
+
+  assert mock_haalwaterstand.called
+  assert mock_post_message.called
+
+@patch('waterstand.haalwaterstand',
+       return_value={'resultaat': 'NOK', 'tekst': 'Foutmelding'})
+@patch('slacker.Chat.post_message', return_value=None)
+@freeze_time("2024-12-18 13:05:00")
+def test_haalwaterstandenpost_fout(mock_post_message, mock_haalwaterstand):
+  os.environ['SLACK_ID_RASPBOT'] = 'DUMMY'
+
+  waterstandslack.haalwaterstandenpost()
+
+  assert mock_haalwaterstand.called
+  assert mock_post_message.called
