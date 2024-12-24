@@ -1,5 +1,5 @@
 certifi==2024.12.14
-charset-normalizer==3.4.0
+charset-normalizer==3.4.1
 coverage==7.6.9
 freezegun==1.5.1
 idna==3.10
