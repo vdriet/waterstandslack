@@ -1,6 +1,6 @@
 certifi==2024.12.14
 charset-normalizer==3.4.1
-coverage==7.6.9
+coverage==7.6.10
 freezegun==1.5.1
 idna==3.10
 iniconfig==2.0.0
