@@ -22,5 +22,5 @@ setuptools==75.6.0
 six==1.17.0
 slacker==0.14.0
 urllib3==2.3.0
-waterstand==1.1.1
+waterstand==1.2.0
 wheel==0.45.1
