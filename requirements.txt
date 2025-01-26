@@ -4,4 +4,4 @@ pip==24.3.1
 pylint==3.3.3
 pytest==8.3.4
 slacker==0.14.0
-waterstand==1.2.0
+waterstand==1.2.1
