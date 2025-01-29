@@ -74,7 +74,7 @@ def test_main_no_post_at_13(mock_converstations_history, mock_converstations_lis
   assert captured.out == 'Laatste bericht op slack: Stand 18-12 11:50 89.0, morgen 97.0\n'
 
   assert mock_haalwaterstand.called
-  assert mock_post_message.called == False
+  assert not mock_post_message.called
   assert mock_converstations_list.called
   assert mock_converstations_history.called
 
