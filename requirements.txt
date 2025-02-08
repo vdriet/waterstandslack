@@ -1,4 +1,4 @@
-coverage==7.6.10
+coverage==7.6.11
 freezegun==1.5.1
 pip==25.0
 pylint==3.3.4
