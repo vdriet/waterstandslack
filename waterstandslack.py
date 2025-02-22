@@ -1,7 +1,8 @@
 """ Ophalen van de waterstand bij Zwolle en posten op slack """
+import json
 import os
 from datetime import datetime
-import json
+
 import requests
 import waterstand
 
@@ -33,11 +34,11 @@ def toonlaatstebericht():
     if channel['name'] == 'waterstand':
       channelid = channel['id']
       conversationhistoryurl = 'https://slack.com/api/conversations.history'
-      data=json.dumps({'channel': channelid})
+      data = json.dumps({'channel': channelid})
       with requests.post(url=conversationhistoryurl,
-                        timeout=10,
-                        headers=headers,
-                        data=data) as response:
+                         timeout=10,
+                         headers=headers,
+                         data=data) as response:
         message = response.json()
       laatste = message['messages'][0]['text']
       print(f'Laatste bericht op slack: {laatste}')
