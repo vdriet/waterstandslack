@@ -18,7 +18,7 @@ python-dateutil==2.9.0.post0
 PyYAML==6.0.2
 requests==2.32.3
 responses==0.25.6
-setuptools==75.8.1
+setuptools==75.8.2
 six==1.17.0
 tomlkit==0.13.2
 trove-classifiers==2025.2.18.16
