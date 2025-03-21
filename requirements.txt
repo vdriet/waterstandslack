@@ -1,7 +1,7 @@
 astroid==3.3.9
 certifi==2025.1.31
 charset-normalizer==3.4.1
-coverage==7.7.0
+coverage==7.7.1
 dill==0.3.9
 freezegun==1.5.1
 idna==3.10
