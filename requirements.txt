@@ -1,6 +1,6 @@
 astroid==3.3.9
 certifi==2025.4.26
-charset-normalizer==3.4.1
+charset-normalizer==3.4.2
 coverage==7.8.0
 dill==0.4.0
 freezegun==1.5.1
