@@ -32,7 +32,7 @@ def test_main_nok_rws(capsys):
 
 @responses.activate
 @patch('waterstand.haalwaterstand',
-       return_value={'resultaat': 'NOK', 'tekst': 'Foutmelding'})
+       return_value={'resultaat': 'NOK', 'error': 'Foutmelding'})
 def test_main_nok_waterstand(mock_waterstand, capsys):
   responses.add(responses.POST, dummywebhook,
                 json={'status': 'ok'}, status=200)
@@ -197,7 +197,7 @@ def test_haalwaterstandenpost(mock_haalwaterstand):
 
 @responses.activate
 @patch('waterstand.haalwaterstand',
-       return_value={'resultaat': 'NOK', 'tekst': 'Foutmelding'})
+       return_value={'resultaat': 'NOK', 'error': 'Foutmelding'})
 def test_haalwaterstandenpost_fout(mock_haalwaterstand):
   responses.add(responses.POST, dummywebhook,
                 json={'status': 'ok'}, status=200)

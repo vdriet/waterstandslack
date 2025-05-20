@@ -48,7 +48,7 @@ def checkwaterstandenpost():
   """ haal de waterstand en zet die op slack als het aan de voorwaarden voldoet """
   gegevens = waterstand.haalwaterstand('Katerveer', 'KATV')
   if gegevens['resultaat'] == 'NOK':
-    postberichtinwaterstand(gegevens['tekst'])
+    postberichtinwaterstand(gegevens['error'])
   else:
     weergavetijd = gegevens['tijd']
     hoogtenu = gegevens['nu']
@@ -70,7 +70,7 @@ def haalwaterstandenpost():
   """ haal de waterstand en post het sowieso """
   gegevens = waterstand.haalwaterstand('Katerveer', 'KATV')
   if gegevens['resultaat'] == 'NOK':
-    postberichtinwaterstand(gegevens['tekst'])
+    postberichtinwaterstand(gegevens['error'])
   else:
     weergavetijd = gegevens['tijd']
     hoogtenu = gegevens['nu']
