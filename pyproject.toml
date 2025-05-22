@@ -40,3 +40,7 @@ fail_under = 90
 
 [tool.pylint]
 indent-string = "  "
+
+[[tool.mypy.overrides]]
+module = ["waterstand.*", "requests.*"]
+follow_untyped_imports = true
