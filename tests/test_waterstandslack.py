@@ -15,7 +15,9 @@ listresponse = {'ok': 'true', 'channels': [{'id': 'DUMMYID', 'name': 'waterstand
 
 
 @responses.activate
-def test_main_nok_rws(capsys):
+@patch('waterstand.haalwaterstand',
+       return_value={'resultaat': 'NOK', 'error': 'Foutmelding'})
+def test_main_nok_rws(mock_waterstand, capsys):
   responses.add(responses.POST, dummywebhook,
                 json={'status': 'ok'}, status=200)
   responses.add(responses.GET, convlisturl,
@@ -27,6 +29,7 @@ def test_main_nok_rws(capsys):
   waterstandslack.main()
 
   captured = capsys.readouterr()
+  assert mock_waterstand.called is True
   assert captured.out == 'Laatste bericht op slack: Gegevens RWS niet beschikbaar\n'
 
 
