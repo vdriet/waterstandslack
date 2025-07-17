@@ -21,7 +21,7 @@ python-dateutil==2.9.0.post0
 PyYAML==6.0.2
 requests==2.32.4
 responses==0.25.7
-ruff==0.12.3
+ruff==0.12.4
 setuptools==80.9.0
 six==1.17.0
 slacker==0.14.0
