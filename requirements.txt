@@ -12,7 +12,7 @@ mccabe==0.7.0
 mypy==1.17.0
 packaging==25.0
 pathspec==0.12.1
-pip==25.1.1
+pip==25.2
 platformdirs==4.3.8
 pluggy==1.6.0
 pylint==3.3.7
