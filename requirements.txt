@@ -7,7 +7,7 @@ freezegun==1.5.5
 hatchling==1.27.0
 idna==3.10
 iniconfig==2.1.0
-isort==6.0.1
+isort==6.1.0
 mccabe==0.7.0
 mypy==1.18.2
 packaging==25.0
