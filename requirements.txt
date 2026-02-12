@@ -13,7 +13,7 @@ mypy==1.19.1
 packaging==26.0
 pathspec==1.0.4
 pip==26.0.1
-platformdirs==4.5.1
+platformdirs==4.6.0
 pluggy==1.6.0
 pylint==4.0.4
 pytest==9.0.2
