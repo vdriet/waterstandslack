@@ -63,7 +63,7 @@ def checkwaterstandenpost() -> None:
   """ haal de waterstand en zet die op slack als het aan de voorwaarden voldoet
   :rtype: None
   """
-  gegevens: dict = waterstand.haalwaterstand('Katerveer', 'KATV')
+  gegevens: dict = waterstand.haalwaterstand('zwolle.ijssel')
   if gegevens['resultaat'] == 'NOK':
     postberichtinwaterstand(gegevens['error'])
   else:
@@ -87,7 +87,7 @@ def haalwaterstandenpost() -> None:
   """ haal de waterstand en post het sowieso
   :rtype: None
   """
-  gegevens: dict = waterstand.haalwaterstand('Katerveer', 'KATV')
+  gegevens: dict = waterstand.haalwaterstand('zwolle.ijssel')
   if gegevens['resultaat'] == 'NOK':
     postberichtinwaterstand(gegevens['error'])
   else:
