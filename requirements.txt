@@ -5,5 +5,5 @@ pip==26.1.1
 pylint==4.0.5
 pytest==9.0.3
 requests==2.34.2
-responses==0.26.0
+responses==0.26.1
 waterstand==3.0.0
